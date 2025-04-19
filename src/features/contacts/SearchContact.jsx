@@ -1,27 +1,17 @@
-import SBCss from "../../components/SearchBox/SearchBox.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { setFilter } from "../../redux/filtersSlice";
-import { getFilter } from "../../redux/selector";
+import css from "../../components/SearchBox/SearchBox.module.css";
+import { useDispatch } from "react-redux";
+import { nameFilter } from "../../redux/filtersSlice.js";
 
-const SearchBox = () => {
-    
-    const dispatch = useDispatch();
-    const value = useSelector(getFilter);
-
-    const onFilterChanged = e => {
-        const val = e.target.value;
-        dispatch(setFilter(val));
-    }
-    
-    
+export default function SearchBox() {
+  const dispatch = useDispatch();
   return (
-    
-      <form className={`${SBCss.form}`}>
-        <label htmlFor="search" className={`${SBCss.lblSrch}`}>Find contacts by name</label>
-        <input id="search" name="filter" className={`${SBCss.txtSrch}`} onChange={onFilterChanged} value={value}/>  
-      </form>
-    
+    <div className={css.searchBox}>
+      <p>Search by name</p>
+      <input
+        type="text"
+        onChange={e => dispatch(nameFilter(e.target.value))}
+        className={css.searchInput}
+      />
+    </div>
   );
-};
-
-export default SearchBox;
+}
