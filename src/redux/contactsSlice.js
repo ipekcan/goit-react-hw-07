@@ -30,7 +30,7 @@ const slice = createSlice({
     builder
       .addCase(addContact.pending, handlePending)
       .addCase(addContact.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.loading = false;
         state.error = null;
         state.items.push(action.payload);
       })
@@ -38,7 +38,7 @@ const slice = createSlice({
     builder
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.loading = false;
         state.error = null;
         const index = state.items.findIndex(
           contact => contact.id === action.payload.id
